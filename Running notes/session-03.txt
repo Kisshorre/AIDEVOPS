@@ -1,0 +1,194 @@
+SG
+inbound -> SSH port 22, my IP
+outbound
+
+absolute path -> from the beginning
+relative path -> from the current location
+
+/c/aidevops/repos/ -> absolute path
+/c/aidevops -> I am already here, I can just give cd repos
+cd repos -> relative path
+
+ssh-keygen -f <file-name>
+
+
+ssh -i kkaidevops ec2-user@54.226.54.13 -> relative path
+ssh -i /c/aidevops/repos/aidevops ec2-user@54.226.54.13 -> absolute path
+
+everything in linux is command
+
+<command-name> <options> <inputs>
+
+/home/ec2-user -> Linux
+/c/Users/siva -> windows
+
+whoami
+ec2-user
+[ec2-user@ip-172-31-35-171 ~]$ id
+uid=1000(ec2-user) gid=1000(ec2-user) groups=1000(ec2-user),4(adm),10(wheel),190(systemd-journal) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+
+uname -> system information
+pwd -> present working directory
+id -> complete user and id information
+
+CRUD -> Create Read Update Delete
+
+Creating files/folders
+reading files/folders
+updating files/folders
+deleting files/folders
+
+touch <file-name> -> create the file
+ls -> files and folders
+ls -l -> list subdirectories in lengthy format
+ls -la -> all files including hidden in lengthy format
+ls -lr -> reverse alphabetical order
+ls -ltr -> files in lengthy format, latest at the bottom
+
+-rw-r--r--. 	1 		ec2-user ec2-user 	0 		Sep 23 02:08 devops.txt
+<permissions>  <links>  <owner>	 <group>  <size> 		<date>	 <file/folder>
+
+mkdir <folder-name>
+
+cat > devops.txt
+Hi, I am learning DevOps -> Press Enter and Ctrl+D
+> -> overriding
+>> -> appending
+
+Linux is case sensitive
+Devops and devops different
+
+cp <source> <destination>
+-r -> recursive option
+cd .. -> one step back
+
+mv source destination -> cut the file
+mv inside same folder works as rename
+
+wget -> web get, download the files from internet
+curl -> it will show the content on the screen <not saving by default>
+
+grep <word-name> <file-name>
+cat <file-name> | grep <word-name>
+-i -> case insensitive
+-n -> print the line number
+-c -> count of findings
+-v -> verbose opposite
+
+cat 04-linux.md | grep -inv linux -> where linux word not there
+head <file-name> -> prints by default top 10 lines
+tail <file-name> -> prints by default bottom 10 lines
+head -n 4 <file-name> -> top 4 lines
+
+20 lines -> 5-13 lines
+
+head -n 13 <file-name> | tail -n 8 
+head -n 13 04-linux.md | tail -n 8
+
+rm aiops.txt
+rm -r aws -> recursive delete
+
+cut and awk
+
+/etc/passwd -> linux user information
+
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:998:998:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:997:997:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/usr/sbin/nologin
+chrony:x:995:995:chrony system user:/var/lib/chrony:/sbin/nologin
+ec2-instance-connect:x:994:994::/home/ec2-instance-connect:/sbin/nologin
+stapunpriv:x:159:159:systemtap unprivileged user:/var/lib/stapunpriv:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+
+cut -d ":" -f1 /etc/passwd
+
+https://raw.githubusercontent.com/daws-92s/concepts/refs/heads/main/04-linux.md
+
+cut -d "/" -f1 
+f1 = https
+f2 = 
+f3 = raw.githubusercontent.com
+
+echo "https://raw.githubusercontent.com/daws-92s/concepts/refs/heads/main/04-linux.md" | cut -d "/" -f9
+
+
+awk command
+============
+awk -F "/" '{print $NF}'
+echo "https://raw.githubusercontent.com/daws-92s/concepts/refs/heads/main/04-linux.md" | awk -F "/" '{print $NF}'
+
+awk -F ":" '{print $1F}' /etc/passwd
+
+0-999 -> system users
+1000 -> manually created users
+>999 
+<999 system users
+
+awk -F ":" '$3 > 999 {print $1,$3F}' /etc/passwd
+
+.tar.gz
+
+tar -czf devops.tar.gz <file-name-1> <file-name-2>
+tar -czf devops.tar.gz 04-linux.md devops.txt
+c -> creating
+z -> .gz format
+f -> file names
+
+tar -xzf devops.tar.gz
+
+whoami
+pwd
+cd
+cd ..
+id
+uname
+touch
+mkdir
+ls
+cat
+cp
+mv
+rm
+wget
+curl
+head
+tail
+piping
+grep
+cut
+awk
+tar
+history
+echo
+clear
+
+editors
+=======
+cat >
+
+vim -> visually improved editor
+
+Esc mode
+Colon/Command mode
+Insert mode
