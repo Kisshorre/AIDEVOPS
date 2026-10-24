@@ -1,5 +1,5 @@
 Redhat-9-DevOps-Practice
-ami-0220d79f3f480ecf5
+ami-0055977a6e828a4f4
 ec2-user
 DevOps321
 
@@ -124,7 +124,7 @@ chrome -> client
 mysql-server -> server package
 mysql -> client
 
-mysql -h 172.31.0.54 -u root -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h 172.31.18.48 -u root -pExpenseApp@1 < /app/schema/backend.sql
 
 1. System user
 2. Programming languages, extensions, build tools, build files, what are dependencies
